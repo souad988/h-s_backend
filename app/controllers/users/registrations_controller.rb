@@ -3,9 +3,11 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   include RackSessionsFix
   respond_to :json
-  
+  skip_before_action :verify_authenticity_token, only: :create 
+
   private
   def respond_with(current_user, _opts = {})
+    p('current_user: ', current_user, 'params: ', params[:name])
     if resource.persisted?
       render json: {
         status: {code: 200, message: 'Signed up successfully.'},
