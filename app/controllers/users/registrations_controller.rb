@@ -5,18 +5,25 @@ class Users::RegistrationsController < Devise::RegistrationsController
   respond_to :json
   skip_before_action :verify_authenticity_token, only: :create 
 
-  private
-  def respond_with(current_user, _opts = {})
-    p('current_user: ', current_user, 'params: ', params[:name])
-    if resource.persisted?
+  def create
+    build_resource(sign_up_params)
+
+    if resource.save
+      #sign_in(resource) # Assuming you want to sign in the user after registration
       render json: {
-        status: {code: 200, message: 'Signed up successfully.'},
-        data: UserSerializer.new(current_user).serializable_hash[:data][:attributes]
+        status: { code: 200, message: 'Signed up successfully.' },
+        data: UserSerializer.new(resource).serializable_hash[:data][:attributes]
       }
     else
       render json: {
-        status: {message: "User couldn't be created successfully. #{current_user.errors.full_messages.to_sentence}"}
+        status: { message: "User couldn't be created successfully. #{resource.errors.full_messages.to_sentence}" }
       }, status: :unprocessable_entity
     end
+  end
+
+  private
+
+  def sign_up_params
+    params.require(:registration).permit(:name, :email, :password)
   end
 end
