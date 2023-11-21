@@ -4,15 +4,29 @@ class Users::SessionsController < Devise::SessionsController
   skip_before_action :verify_authenticity_token, only: :create
   include RackSessionsFix
   respond_to :json
-
   
-  def respond_with(current_user, _opts = {})
-    render json: {
-      status: { 
-        code: 200, message: 'Logged in successfully.',
-        data: { user: UserSerializer.new(current_user).serializable_hash[:data][:attributes] }
-      }
-    }, status: :ok
+  private
+  def sign_in_params
+    params.require(:user).permit(:email, :password)
+  end
+
+  def respond_with(resource, _opts = {})
+    p('resource and params : ', resource, params)
+    if resource.persisted?
+      render json: {
+        status: { 
+          code: 200, message: 'Logged in successfully.',
+          data: { user: UserSerializer.new(resource).serializable_hash[:data][:attributes],
+                  token: current_token }  
+        }
+      }, status: :ok
+    else
+      render json: {
+        status: {
+          code: 401, message: 'Invalid email or password.'
+        }
+      }, status: :unauthorized
+    end
   end
 
   def respond_to_on_destroy
@@ -32,6 +46,10 @@ class Users::SessionsController < Devise::SessionsController
         message: "Couldn't find an active session."
       }, status: :unauthorized
     end
+  end
+
+  def current_token
+    request.env['warden-jwt_auth.token']
   end
 
 end

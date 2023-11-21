@@ -1,0 +1,11 @@
+ '''
+  def respond_with(current_user, _opts = {})
+    p('current_user: ', current_user)
+    render json: {
+      status: { 
+        code: 200, message: 'Logged in successfully.',
+        data: { user: UserSerializer.new(current_user).serializable_hash[:data][:attributes] }
+      }
+    }, status: :ok
+  end
+  '''
