@@ -69,5 +69,17 @@ Rails.application.configure do
   # config.action_cable.disable_request_forgery_protection = true
 
   #define default url options for mailer
-  config.action_mailer.default_url_options = { host: 'localhost', port: 3001 }
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.perform_caching = false
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3001 } # Adjust the port if needed
+  config.action_mailer.delivery_method = :smtp
+  Rails.application.config.action_mailer.smtp_settings = {
+    address: Rails.application.credentials.dig(:email, :address),
+    port: Rails.application.credentials.dig(:email, :port),
+    domain: Rails.application.credentials.dig(:email, :domain),
+    user_name: Rails.application.credentials.dig(:email, :username),
+    password: Rails.application.credentials.dig(:email, :password),
+    authentication: Rails.application.credentials.dig(:email, :authentication),
+    enable_starttls_auto: Rails.application.credentials.dig(:email, :enable_starttls_auto)
+  }
 end
