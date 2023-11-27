@@ -10,8 +10,12 @@ Rails.application.routes.draw do
   },
   controllers: {
     sessions: 'users/sessions',
-    registrations: 'users/registrations'
+    registrations: 'users/registrations',
+    confirmations: 'users/confirmations'
   }
+  devise_scope :user do
+    get '/confirmation/resend', to: 'users/confirmations#resend', as: 'resend_confirmation'
+  end
   namespace :api do
     namespace :v1 do
       get 'random_message', to: 'messages#random_message'
