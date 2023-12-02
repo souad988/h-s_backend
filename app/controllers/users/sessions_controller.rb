@@ -23,7 +23,8 @@ class Users::SessionsController < Devise::SessionsController
     else
       render json: {
         status: {
-          code: 401, message: 'Invalid email or password.'
+          code: 401, message: 'Invalid email or password.',
+          data: { user: UserSerializer.new(resource).serializable_hash[:data][:attributes] }
         }
       }, status: :unauthorized
     end

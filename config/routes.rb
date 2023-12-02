@@ -14,7 +14,7 @@ Rails.application.routes.draw do
     confirmations: 'users/confirmations'
   }
   devise_scope :user do
-    get '/confirmation/resend', to: 'users/confirmations#resend', as: 'resend_confirmation'
+    get 'confirmation/resend', to: 'users/confirmations#resend', as: 'resend_confirmation'
   end
   namespace :api do
     namespace :v1 do
