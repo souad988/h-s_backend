@@ -11,11 +11,15 @@ Rails.application.routes.draw do
   controllers: {
     sessions: 'users/sessions',
     registrations: 'users/registrations',
-    confirmations: 'users/confirmations'
+    confirmations: 'users/confirmations',
+    passwords: 'users/passwords'
   }
+  
   devise_scope :user do
     get 'confirmation/resend', to: 'users/confirmations#resend', as: 'resend_confirmation'
+    post 'resetPassword', to: 'users/passwords#create'
   end
+
   namespace :api do
     namespace :v1 do
       get 'random_message', to: 'messages#random_message'

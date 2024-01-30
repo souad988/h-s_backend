@@ -89,6 +89,29 @@ Install this project with:
   bundle install (install all dependencies)
   Configure config/database.yml Update the username and password fields if your PostgreSQL installation requires authentication
   rails db:create
+  create a new api key in sendGrid then store it in credentials.yml
+  generate and save devise jwt secret key: 
+  bundle exec rake secret
+  EDITOR='code --wait' rails credentials:edit
+  Then we add a new key: value in the credentials.yml file.
+    # Other secrets...  
+    # Used as the base secret for Devise-JWT 
+    devise_jwt_secret_key: (copy and paste the generated secret here)
+    HS_API_KEY=<key from sendGrid>
+
+    secret_key_base: 
+SENDGRID_API_KEY: 
+devise_jwt_secret_key: 
+email:
+  address: "smtp.sendgrid.net"
+  port: 587
+  domain: "smtp.sendgrid.net"
+  username: "H&S_API_KEY"
+  password: <%= ENV['SENDGRID_API_KEY'] %>
+  authentication: :plain
+  enable_starttls_auto: true
+
+
   rails db:migrate
   rails db:seed
 
