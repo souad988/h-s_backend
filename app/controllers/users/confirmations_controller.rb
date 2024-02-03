@@ -7,7 +7,7 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
     p "confirmation_token: #{resource.email}"
     if resource.errors.empty?
       resource.update(confirmed: true)
-      redirect_to "http://localhost:3000/login" # Modify this URL to your frontend confirmation success page
+      redirect_to 'http://localhost:3000/login' # Modify this URL to your frontend confirmation success page
     else
       # Handle resource errors or invalid token
       redirect_to "http://localhost:3000/confirmation_error/#{params[:email]}"
