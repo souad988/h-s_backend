@@ -1,7 +1,7 @@
 
 <a name="readme-top"></a>
 
-  <h3><b>rails_backend</b></h3>
+  <h3><b>H&S_backend</b></h3>
 
 </div>
 
@@ -28,9 +28,13 @@
 
 <!-- PROJECT DESCRIPTION -->
 
-# 📖 [rails backend] <a name="about-project"></a>
+# 📖 [H&S_backend] <a name="about-project"></a>
 
-**[rails backend]** is a rails server side application that provides api endpoints for frontend side. 
+**[H&S_backend]**
+
+The [H&S_backend] is a robust Rails server-side application meticulously designed to serve as the backbone for our (H&S) eCommerce platform. It plays a pivotal role by delivering essential API endpoints and services crucial for the seamless functioning of our application. Additionally, [H&S_backend] hosts the user-friendly admin portal, empowering efficient management and oversight of our H&S eCommerce ecosystem.
+
+![drawSQL-e-com-export-2024-02-02](https://github.com/souad988/h-s_backend/assets/59707859/8a09668f-6d51-44d7-b22c-4d6c8a9f9f26)
 
 ## 🛠 Built With <a name="built-with"></a>
 
@@ -88,7 +92,6 @@ Install this project with:
 
   bundle install (install all dependencies)
   Configure config/database.yml Update the username and password fields if your PostgreSQL installation requires authentication
-  rails db:create
   create a new api key in sendGrid then store it in credentials.yml
   generate and save devise jwt secret key: 
   bundle exec rake secret
@@ -98,20 +101,10 @@ Install this project with:
     # Used as the base secret for Devise-JWT 
     devise_jwt_secret_key: (copy and paste the generated secret here)
     HS_API_KEY=<key from sendGrid>
-
     secret_key_base: 
-SENDGRID_API_KEY: 
-devise_jwt_secret_key: 
-email:
-  address: "smtp.sendgrid.net"
-  port: 587
-  domain: "smtp.sendgrid.net"
-  username: "H&S_API_KEY"
-  password: <%= ENV['SENDGRID_API_KEY'] %>
-  authentication: :plain
-  enable_starttls_auto: true
-
-
+    SENDGRID_API_KEY: 
+    devise_jwt_secret_key: 
+  rails db:create
   rails db:migrate
   rails db:seed
 
@@ -137,9 +130,10 @@ To run the project, execute the following command:
 
 ## 🔭 Future Features <a name="future-features"></a>
 
-- [ ] **[Add Create messages feature]**
-
-
+- [ ] **[Add Order feature]**
+- [ ] **[Add Payment feature]**
+- [ ] **[Add Delivery feature]**
+      
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- CONTRIBUTING -->
@@ -164,7 +158,7 @@ If you like this project please show your support by adding a star
 
 ## 🙏 Acknowledgments <a name="acknowledgements"></a>
 
-I would like to thank the microverse community for there continous support and help. 
+I would like to thank you for your visit. 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
