@@ -1,4 +1,3 @@
-class CategorySerializer
-  include JSONAPI::Serializer
+class CategorySerializer < ActiveModel::Serializer
   attributes :name
 end

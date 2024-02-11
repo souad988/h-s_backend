@@ -1,4 +1,3 @@
-class SizeSerializer
-  include JSONAPI::Serializer
+class SizeSerializer < ActiveModel::Serializer
   attributes :name
 end

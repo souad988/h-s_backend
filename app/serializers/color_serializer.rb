@@ -1,4 +1,3 @@
-class ColorSerializer
-  include JSONAPI::Serializer
+class ColorSerializer < ActiveModel::Serializer
   attributes :name, :code
 end
