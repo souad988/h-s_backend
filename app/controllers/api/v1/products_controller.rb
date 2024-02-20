@@ -1,7 +1,7 @@
 class Api::V1::ProductsController < ApplicationController
   def index
     @products = Product.where(deleted: false).order(created_at: 'desc')
-    render json: @products, each_serializer: ProductSerializer
+    render json: @products, each_serializer: ProductsSerializer
   end
 
   def show
